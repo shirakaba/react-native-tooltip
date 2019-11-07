@@ -3,11 +3,8 @@
   "version": "5.2.0",
   "description": "A react-native wrapper for showing tooltips",
   "main": "ToolTip.ios.js",
-  "author": {
-    "name": "Chirag Jain",
-    "email": "jain_chirag04@yahoo.com",
-    "url": "http://chiragjain.tumblr.com"
-  },
+  "author": "Chirag Jain <jain_chirag04@yahoo.com>",
+  "website": "https://github.com/blockfirm/react-native-tooltip",
   "license": "MIT",
   "repository": {
     "type": "git",

@@ -2,14 +2,23 @@
 
 A react-native component from displaying tooltip. Uses UIMenuController.
 
-### Add it to your project
+## Installation
 
-1. Run `npm install react-native-tooltip --save`
-2. Open your project in XCode, right click on `Libraries` and click `Add
-   Files to "Your Project Name"` [(Screenshot)](http://url.brentvatne.ca/jQp8) then [(Screenshot)](http://url.brentvatne.ca/1gqUD).
-3. Add `libRNToolTipMenu.a` to `Build Phases -> Link Binary With Libraries`
-   [(Screenshot)](http://url.brentvatne.ca/17Xfe).
-4. Whenever you want to use it within React code: `var ToolTip = require('react-native-tooltip');`
+### Mostly automatic installation
+
+1. Add this to your dependencies in `package.json`: `"react-native-tooltip": "git+https://github.com/blockfirm/react-native-tooltip.git"`
+2. Run `npm install`
+3. **React Native 0.60+**: `$ cd ios && pod install`  
+   **React Native <0.60**: `$ react-native link react-native-tooltip`
+
+### Manual installation
+
+1. Add this to your dependencies in `package.json`: `"react-native-tooltip": "git+https://github.com/blockfirm/react-native-tooltip.git"`
+2. Run `npm install`
+3. In XCode, in the project navigator, right click `Libraries` ➜ `Add Files to [your project's name]`
+4. Go to `node_modules` ➜ `react-native-tooltip` and add `ToolTipMenu.xcodeproj`
+5. In XCode, in the project navigator, select your project. Add `libToolTipMenu.a` to your project's `Build Phases` ➜ `Link Binary With Libraries`
+6. Run your project (`Cmd+R`)
 
 ## Usage
 
@@ -47,23 +56,23 @@ export default class MyToolTip extends React.Component {
     state = {
         input: 'chirag'
     };
-    
+
     handleCopyPress = () => {
         AlertIOS.alert(`Copy has been pressed!`);
     };
-    
+
     handleOtherPress = () => {
         AlertIOS.alert(`Other has been pressed!`);
     };
-    
+
     handleHide = () => {
         console.log('Tooltip did hide');
     };
-    
+
     handleShow = () => {
         console.log('tooltip did show');
     };
-    
+
     render() {
         return (
           <View style={{flex: 1, justifyContent: 'center'}}>

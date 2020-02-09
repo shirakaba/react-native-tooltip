@@ -55,6 +55,19 @@ RCT_EXPORT_METHOD(
 }
 
 RCT_EXPORT_METHOD(
+                  showWithPoint:(nonnull NSNumber *)reactTag
+                  items: (NSArray *)items
+                  arrowDirection: (NSString *)arrowDirection
+                  x: (nonnull NSNumber *)x
+                  y: (nonnull NSNumber *)y
+                  )
+{
+    UIView *view = [self.bridge.uiManager viewForReactTag:reactTag];
+    CGRect frame = CGRectMake(x.floatValue, y.floatValue, view.frame.size.width, view.frame.size.height);
+    [self showInView:view withFrame:frame items:items arrowDirection:arrowDirection];
+}
+
+RCT_EXPORT_METHOD(
                   showWithFrame:(nonnull NSNumber *)reactTag
                   items: (NSArray *)items
                   arrowDirection: (NSString *)arrowDirection

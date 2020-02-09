@@ -13,11 +13,7 @@ RCT_EXPORT_MODULE()
     return dispatch_get_main_queue();
 }
 
-RCT_EXPORT_METHOD(show:(nonnull NSNumber *)reactTag
-                  items: (NSArray *)items
-                  arrowDirection: (NSString *)arrowDirection)
-{
-    UIView *view = [self.bridge.uiManager viewForReactTag:reactTag];
+-(void)showInView:(UIView *)view withFrame:(CGRect)frame items: (NSArray *)items arrowDirection: (NSString *)arrowDirection {
     NSArray *buttons = items;
     NSMutableArray *menuItems = [NSMutableArray array];
     for (NSString *buttonText in buttons) {
@@ -28,7 +24,7 @@ RCT_EXPORT_METHOD(show:(nonnull NSNumber *)reactTag
     }
     [view becomeFirstResponder];
     UIMenuController *menuCont = [UIMenuController sharedMenuController];
-    [menuCont setTargetRect:view.frame inView:view.superview];
+    [menuCont setTargetRect:frame inView:view.superview];
 
     [[NSNotificationCenter defaultCenter] addObserver:view selector:@selector(didHideMenu:) name:UIMenuControllerDidHideMenuNotification object:nil];
 
@@ -42,13 +38,38 @@ RCT_EXPORT_METHOD(show:(nonnull NSNumber *)reactTag
     } else if ([arrowDirection isEqualToString: @"down"]) {
       menuCont.arrowDirection = UIMenuControllerArrowDown;
     } else {
-      menuCont.arrowDirection = UIMenuControllerArrowDefault;   
+      menuCont.arrowDirection = UIMenuControllerArrowDefault;
     }
     menuCont.menuItems = menuItems;
     [menuCont setMenuVisible:YES animated:YES];
 }
 
-RCT_EXPORT_METHOD(hide){   
+RCT_EXPORT_METHOD(
+                  show:(nonnull NSNumber *)reactTag
+                  items: (NSArray *)items
+                  arrowDirection: (NSString *)arrowDirection
+                  )
+{
+    UIView *view = [self.bridge.uiManager viewForReactTag:reactTag];
+    [self showInView:view withFrame:view.frame items:items arrowDirection:arrowDirection];
+}
+
+RCT_EXPORT_METHOD(
+                  showWithFrame:(nonnull NSNumber *)reactTag
+                  items: (NSArray *)items
+                  arrowDirection: (NSString *)arrowDirection
+                  x: (nonnull NSNumber *)x
+                  y: (nonnull NSNumber *)y
+                  width: (nonnull NSNumber *)width
+                  height: (nonnull NSNumber *)height
+                  )
+{
+    UIView *view = [self.bridge.uiManager viewForReactTag:reactTag];
+    CGRect frame = CGRectMake(x.floatValue, y.floatValue, width.floatValue, height.floatValue);
+    [self showInView:view withFrame:frame items:items arrowDirection:arrowDirection];
+}
+
+RCT_EXPORT_METHOD(hide){
     UIMenuController *menuCont = [UIMenuController sharedMenuController];
     [menuCont setMenuVisible:NO animated:NO];
 }

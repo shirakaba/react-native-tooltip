@@ -3,4 +3,6 @@
 
 @interface ToolTipMenu : NSObject <RCTBridgeModule>
 
+-(void)showInView:(UIView *)view withFrame:(CGRect)frame items: (NSArray *)items arrowDirection: (NSString *)arrowDirection;
+
 @end

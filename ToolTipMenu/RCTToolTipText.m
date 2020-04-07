@@ -30,6 +30,13 @@ RCT_NOT_IMPLEMENTED(- (instancetype)initWithCoder:(NSCoder *)aDecoder)
 }
 
 - (void)tappedMenuItem:(NSString *)text {
+    _nativeEventCount++;
+    [_eventDispatcher sendTextEventWithType:RCTTextEventTypeChange
+                                        reactTag:self.reactTag
+                                            text:text
+                                            key:nil
+                                      eventCount:_nativeEventCount];
+    
     if(_onChoice == nil){
       return;
     }

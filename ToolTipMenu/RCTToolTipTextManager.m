@@ -7,6 +7,8 @@
 
 RCT_EXPORT_MODULE()
 
+RCT_EXPORT_VIEW_PROPERTY(onChoice, RCTDirectEventBlock)
+
 + (BOOL)requiresMainQueueSetup
 {
   return YES;
